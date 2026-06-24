@@ -14,7 +14,7 @@ string Utils::trim(const string& str) {
 
 string Utils::toLower(const string& str) {
     string result = str;
-    transform(result.begin(), result.end(), result.begin(), ::tolower);
+    transform(result.begin(), result.end(), result.begin(), [](unsigned char c) { return static_cast<char>(::tolower(c)); });
     return result;
 }
 
@@ -37,7 +37,7 @@ bool Utils::isInteger(const string& str) {
 bool Utils::isDouble(const string& str) {
     if (str.empty()) return false;
     try {
-        stod(str);
+        (void)stod(str);
         return true;
     } catch (...) {
         return false;

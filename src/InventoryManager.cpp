@@ -108,6 +108,16 @@ void InventoryManager::addTransaction(const Transaction& trans) {
     transactions.push(trans);
 }
 
+vector<Transaction> InventoryManager::getTransactionHistory() const {
+    vector<Transaction> results;
+    queue<Transaction> tempQueue = transactions;
+    while (!tempQueue.empty()) {
+        results.push_back(tempQueue.front());
+        tempQueue.pop();
+    }
+    return results;
+}
+
 vector<Transaction> InventoryManager::getProductTransactions(int productId) const {
     vector<Transaction> results;
     queue<Transaction> tempQueue = transactions;

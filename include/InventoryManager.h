@@ -32,7 +32,7 @@ public:
     bool stockOut(int productId, int quantity, double unitPrice);
     
     // 統計信息
-    int getTotalProducts() const { return products.size(); }
+    int getTotalProducts() const { return static_cast<int>(products.size()); }
     int getTotalQuantity() const;
     double getTotalValue() const;
     vector<Product*> getLowStockProducts() const;
@@ -40,7 +40,7 @@ public:
 
     // 交易記錄
     void addTransaction(const Transaction& trans);
-    vector<Transaction> getTransactionHistory() const { return transactions; }
+    vector<Transaction> getTransactionHistory() const;
     vector<Transaction> getProductTransactions(int productId) const;
 
     // 數據驗證

@@ -26,7 +26,8 @@ add_executable(inventory_system ${SOURCES})
 
 # 如果需要額外的編譯選項
 if(MSVC)
-    target_compile_options(inventory_system PRIVATE /W4)
+    target_compile_options(inventory_system PRIVATE /W4 /utf-8)
+    target_compile_definitions(inventory_system PRIVATE _CRT_SECURE_NO_WARNINGS _HAS_STD_BYTE=0)
 else()
     target_compile_options(inventory_system PRIVATE -Wall -Wextra -pedantic)
 endif()

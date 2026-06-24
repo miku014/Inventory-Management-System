@@ -234,9 +234,10 @@ void UIManager::viewProduct() {
 void UIManager::modifyProduct() {
     clearScreen();
     printHeader("=== 修改商品 ===");
-    int id = getInput("請輸入商品ID");
-    Product* product = manager->getProduct(id);
+    int id = selectProduct();
+    if (id == -1) return;
 
+    Product* product = manager->getProduct(id);
     if (!product) {
         cout << "✗ 未找到該商品！" << endl;
         pause();
@@ -272,7 +273,8 @@ void UIManager::modifyProduct() {
 void UIManager::deleteProduct() {
     clearScreen();
     printHeader("=== 刪除商品 ===");
-    int id = getInput("請輸入商品ID");
+    int id = selectProduct();
+    if (id == -1) return;
 
     Product* product = manager->getProduct(id);
     if (!product) {
@@ -481,10 +483,15 @@ void UIManager::saveData() {
 void UIManager::loadData() {
     manager->clear();
     vector<Product*> products = fileManager->loadProducts();
+    int loadedCount = 0;
     for (auto product : products) {
-        manager->addProduct(product);
+        if (manager->addProduct(product)) {
+            loadedCount++;
+        } else {
+            delete product; // 避免記憶體洩漏
+        }
     }
-    cout << "✓ 已加載 " << products.size() << " 個商品" << endl;
+    cout << "✓ 已加載 " << loadedCount << " 個商品" << endl;
     pause();
 }
 
@@ -514,6 +521,9 @@ int UIManager::getInput(const string& prompt) const {
     int value;
     cout << prompt << ": ";
     while (!(cin >> value)) {
+        if (cin.eof()) {
+            return 0; // EOF 時回傳 0，引導程式安全退出
+        }
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "輸入無效，請重試: ";
@@ -525,7 +535,9 @@ int UIManager::getInput(const string& prompt) const {
 string UIManager::getStringInput(const string& prompt) const {
     string value;
     cout << prompt << ": ";
-    getline(cin, value);
+    if (!getline(cin, value)) {
+        return "";
+    }
     return value;
 }
 
@@ -533,6 +545,9 @@ double UIManager::getDoubleInput(const string& prompt) const {
     double value;
     cout << prompt << ": ";
     while (!(cin >> value)) {
+        if (cin.eof()) {
+            return 0.0;
+        }
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "輸入無效，請重試: ";
@@ -542,9 +557,27 @@ double UIManager::getDoubleInput(const string& prompt) const {
 }
 
 int UIManager::selectProduct() {
-    listAllProducts();
-    clearScreen();
-    return getInput("輸入商品ID");
+    vector<Product*> products = manager->getAllProducts();
+    if (products.empty()) {
+        cout << "目前沒有商品！" << endl;
+        pause();
+        return -1;
+    }
+
+    cout << "=== 商品清單 ===" << endl;
+    for (const auto& product : products) {
+        product->displayDetails();
+    }
+    printSeparator();
+
+    while (true) {
+        int id = getInput("請輸入商品 ID (或輸入 0 取消)");
+        if (id == 0) return -1;
+        if (manager->isProductIdExists(id)) {
+            return id;
+        }
+        cout << "✗ 該商品 ID 不存在，請重新輸入！" << endl;
+    }
 }
 
 int UIManager::getProductType() {
