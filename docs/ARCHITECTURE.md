@@ -12,6 +12,9 @@
 3. **系統支撐層 (System Support Layer)**：處理終端機 UI 渲染、使用者互動輸入、檔案 I/O 讀寫與資料庫模擬。
 
 ### 1.1 系統架構關聯圖
+
+![系統架構圖](architecture_diagram.png)
+
 以下為系統模組關係的 Mermaid 示意圖：
 
 ```mermaid

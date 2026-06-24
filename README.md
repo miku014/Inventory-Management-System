@@ -38,6 +38,8 @@
 
 ## 🏗️ 架構設計
 
+![系統架構圖](docs/architecture_diagram.png)
+
 ### 類別繼承結構
 ```
 Product (基礎類別)
