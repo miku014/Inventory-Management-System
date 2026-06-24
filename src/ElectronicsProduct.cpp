@@ -15,7 +15,7 @@ double ElectronicsProduct::getDepreciatedValue() const {
 }
 
 string ElectronicsProduct::getInfo() const {
-    return "Electronics | " + name + " | Warranty: " + to_string(warranty) + " months";
+    return "電子產品 | " + name + " | 保固期: " + to_string(warranty) + " 個月";
 }
 
 double ElectronicsProduct::calculateValue() const {
@@ -29,9 +29,9 @@ string ElectronicsProduct::toCSV() const {
 }
 
 void ElectronicsProduct::displayDetails() const {
-    cout << "[ELECTRONICS] ID: " << id << " | Name: " << name << " | Price: $"
-         << fixed << setprecision(2) << price << " | Depreciated: $" << getDepreciatedValue()
-         << " | Qty: " << quantity << " | Warranty: " << warranty << " months" << endl;
+    cout << "[電子產品] ID: " << id << " | 名稱: " << name << " | 價格: $"
+         << fixed << setprecision(2) << price << " | 折舊價: $" << getDepreciatedValue()
+         << " | 數量: " << quantity << " | 保固期: " << warranty << " 個月" << endl;
 }
 
 bool ElectronicsProduct::isValid() const {

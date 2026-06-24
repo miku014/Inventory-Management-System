@@ -19,7 +19,7 @@ int PerishableProduct::getDaysUntilExpiry() const {
 }
 
 string PerishableProduct::getInfo() const {
-    return "Perishable | " + name + " | Expires: " + expiryDate;
+    return "易腐商品 | " + name + " | 到期日: " + expiryDate;
 }
 
 double PerishableProduct::calculateValue() const {
@@ -33,13 +33,13 @@ string PerishableProduct::toCSV() const {
 }
 
 void PerishableProduct::displayDetails() const {
-    cout << "[PERISHABLE] ID: " << id << " | Name: " << name << " | Price: $"
-         << fixed << setprecision(2) << price << " | Qty: " << quantity
-         << " | Supplier: " << supplier << " | Expiry: " << expiryDate;
+    cout << "[易腐商品] ID: " << id << " | 名稱: " << name << " | 價格: $"
+         << fixed << setprecision(2) << price << " | 數量: " << quantity
+         << " | 供應商: " << supplier << " | 到期日: " << expiryDate;
     if (isExpired()) {
-        cout << " [EXPIRED]";
+        cout << " [已過期]";
     } else {
-        cout << " (" << getDaysUntilExpiry() << " days left)";
+        cout << " (剩餘 " << getDaysUntilExpiry() << " 天到期)";
     }
     cout << endl;
 }

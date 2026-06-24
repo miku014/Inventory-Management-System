@@ -7,7 +7,7 @@ RegularProduct::RegularProduct(int id, const string& name, double price, int qua
     : Product(id, name, price, quantity, supplier), category(category) {}
 
 string RegularProduct::getInfo() const {
-    return "Regular | " + name + " | Category: " + category;
+    return "普通商品 | " + name + " | 類別: " + category;
 }
 
 string RegularProduct::toCSV() const {
@@ -16,9 +16,9 @@ string RegularProduct::toCSV() const {
 }
 
 void RegularProduct::displayDetails() const {
-    cout << "[REGULAR] ID: " << id << " | Name: " << name << " | Price: $"
-         << fixed << setprecision(2) << price << " | Qty: " << quantity
-         << " | Supplier: " << supplier << " | Category: " << category << endl;
+    cout << "[普通商品] ID: " << id << " | 名稱: " << name << " | 價格: $"
+         << fixed << setprecision(2) << price << " | 數量: " << quantity
+         << " | 供應商: " << supplier << " | 類別: " << category << endl;
 }
 
 bool RegularProduct::isValid() const {

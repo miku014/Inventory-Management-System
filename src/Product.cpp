@@ -38,6 +38,6 @@ string Product::toCSV() const {
 }
 
 void Product::displayDetails() const {
-    cout << "ID: " << id << " | Name: " << name << " | Price: $" << fixed << setprecision(2) << price
-         << " | Quantity: " << quantity << " | Supplier: " << supplier << endl;
+    cout << "ID: " << id << " | 名稱: " << name << " | 價格: $" << fixed << setprecision(2) << price
+         << " | 數量: " << quantity << " | 供應商: " << supplier << endl;
 }
