@@ -1,0 +1,31 @@
+# Build directories
+build/
+CMakeFiles/
+*.cmake
+CMakeCache.txt
+Makefile
+
+# Compiled files
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# IDE files
+.vscode/
+.idea/
+*.sln
+*.vcxproj*
+*.pro
+.DS_Store
+
+# Executable
+inventory_system
+
+# Logs
+*.log
+
+# Data files (optional - uncomment if you want to ignore them)
+# data/*.csv
